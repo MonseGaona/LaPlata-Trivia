@@ -6,14 +6,10 @@
           <img src="../assets/images/logoBlanco.png" alt="icon" />
         </div>
         <div class="landingPage-text">
-          <h1>¡Bienvenido!</h1>
+          <h1>¡Bienvenido a la Trivia de La Plata!</h1>
           <p>
-            Se le presentan tres preguntas y cuatro opciones, tiene 30
-            segundos para responder, después de terminar ese tiempo
-            pasará automáticamente a la siguiente pregunta. No seleccionar una respuesta o
-            no responder dentro del límite de tiempo resultará en una pérdida de puntos.
-            En el final de la prueba, se mostrará su puntuación total, si está es de tres puntos
-            podra girar la ruleta de premios. ¡¡Buena suerte!!
+            Responde correctamente 3 preguntas y gira la ruleta de premios. <br>
+            ¡¡Buena suerte!!
           </p>
           <button @click="handleStartQuiz">Comenzar</button>
         </div>
@@ -90,26 +86,39 @@ export default {
     },
 
     playAgain() {
-      // Reiniciar las variables de estado
-      this.currentQuestion = 0;
-      this.points = 0;
-      this.showResult = false;
+  // Reiniciar las variables de estado
+  this.currentQuestion = 0;
+  this.showResult = false;
 
-      // Obtener un nuevo conjunto aleatorio de preguntas del pool para el juego actual
-      const randomQuestions = shuffle(this.questionsPool).slice(0, this.totalQuestions);
+  // Obtener un nuevo conjunto aleatorio de preguntas del pool para el juego actual
+  const randomQuestions = shuffle(this.questionsPool).slice(0, this.totalQuestions);
 
-      // Mezclar las respuestas de cada pregunta en el conjunto aleatorio
-      randomQuestions.forEach((question) => {
-        question.respuestas = shuffle(question.respuestas);
-      });
+  // Mezclar las respuestas de cada pregunta en el conjunto aleatorio
+  randomQuestions.forEach((question) => {
+    question.respuestas = shuffle(question.respuestas);
+  });
 
-      this.questionsToShow = randomQuestions;
-    },
+  this.questionsToShow = randomQuestions;
+},
 
-    redirectToHomePage() {
-      this.startQuiz = false; // Set startQuiz to false to show the landing page again
-      this.showResult = false; // Hide the result page
-    },
+
+redirectToHomePage() {
+  this.startQuiz = false; // Reiniciar startQuiz a false para mostrar la landing page
+  this.showResult = false; // Ocultar la página de resultados
+  this.points = 0; // Reiniciar los puntos al volver al inicio
+  this.selectedAnswerIndex = null; // Reiniciar la respuesta seleccionada
+
+  // Obtener un nuevo conjunto aleatorio de preguntas del pool para el juego actual
+  const randomQuestions = shuffle(this.questionsPool).slice(0, this.totalQuestions);
+
+  // Mezclar las respuestas de cada pregunta en el conjunto aleatorio
+  randomQuestions.forEach((question) => {
+    question.respuestas = shuffle(question.respuestas);
+  });
+
+  this.questionsToShow = randomQuestions;
+},
+
   },
 };
 </script>

@@ -406,12 +406,12 @@ export default {
 
     .prize-message p {
         padding: 8% 0 10% 0;
-        font-size: 4vw;
+        font-size: 6vw;
     }
 
     .prize-message button {
         padding: 3% 6%;
-        font-size: 4vw;
+        font-size: 6vw;
         width: 60%;
         margin-top: 5%;
     }
